@@ -1,5 +1,5 @@
 MyPC - DESKTOP-GDEQGMV
-My Laptop - 
+MyLaptop - DESKTOP-6MSJJDI
 
 CREATE DATABASE [test_db]
 

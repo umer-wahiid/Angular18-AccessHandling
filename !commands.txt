@@ -1,3 +1,9 @@
 ----For Angular Material------ng add @angular/material
 
 -----For Toaster-------npm i ngx-toastr
+
+-----For Components---------ng g c component/componentName
+
+-----For Services----------ng g s _services/serviceName
+
+-----For Environment-----------ng g environments
