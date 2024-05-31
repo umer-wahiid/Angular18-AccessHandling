@@ -1,1 +1,27 @@
-<p>appmenu works!</p>
+<div>
+    <mat-toolbar color="primary" class="mat-elevation-z8">
+        <button mat-icon-button (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>Access Management System</span>
+    </mat-toolbar>
+    <mat-drawer-container autosize>
+        <mat-drawer #drawer opened="true" mode="side" position="start">
+            <mat-nav-list>
+                <mat-list-item>
+                    <button mat-button routerLink=""><mat-icon>home</mat-icon>Home</button>
+                </mat-list-item>
+                @for(item of menulist;track item){
+                    <mat-list-item>
+                        <button mat-button routerLink="item.code"><mat-icon>home</mat-icon>{{item.name}}</button>
+                    </mat-list-item>
+                }
+            </mat-nav-list>
+        </mat-drawer>
+        <mat-drawer-content>
+             <div style="text-align: center;min-height: 600px;">
+                <router-outlet />
+            </div>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>

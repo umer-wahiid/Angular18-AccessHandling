@@ -22,3 +22,8 @@ export interface loginresp {
     refreshToken: string;
     userRole: string;
 }
+
+export interface menu {
+    code: string;
+    name: string;
+}
