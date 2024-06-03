@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MaterialModule } from '../../material.module';
 import { Router, RouterLink } from '@angular/router';
@@ -14,10 +14,15 @@ import { loginresp, usercred } from '../../_model/user.model';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
   constructor(private builder: FormBuilder, private service: UserService, private toastr: ToastrService, private router: Router) {
 
+  }
+
+  ngOnInit(): void {
+    localStorage.clear();
+    this.service._menuList.set([]);
   }
 
   _response!: loginresp;
@@ -39,6 +44,11 @@ export class LoginComponent {
         localStorage.setItem('token', this._response.token);
         localStorage.setItem('username', _obj.username);
         localStorage.setItem('userrole', this._response.userRole);
+
+        this.service.Loadmenubyrole(this._response.userRole).subscribe(item=>{
+          this.service._menuList.set(item);
+        });
+
         this.router.navigateByUrl('/');
       }, error => {
         this.toastr.error('Failed to login', error.error.title)

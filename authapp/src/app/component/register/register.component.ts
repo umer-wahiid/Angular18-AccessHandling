@@ -16,7 +16,6 @@ import { ToastrService } from 'ngx-toastr';
 
 export class RegisterComponent {
   constructor(private builder: FormBuilder, private service: UserService, private toastr: ToastrService, private router: Router) {
-
   }
 
   _response: any;
@@ -57,5 +56,4 @@ export class RegisterComponent {
       });
     }
   }
-
 }

@@ -29,3 +29,7 @@ mat-card{
 button{
     margin: 2px;
 }
+
+.example-spacer{
+    flex: 1 1 auto;
+}

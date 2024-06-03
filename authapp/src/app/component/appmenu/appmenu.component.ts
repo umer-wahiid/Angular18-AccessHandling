@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit, effect } from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { UserService } from '../../_services/user.service';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -11,19 +11,38 @@ import { menu } from '../../_model/user.model';
   templateUrl: './appmenu.component.html',
   styleUrl: './appmenu.component.css'
 })
-export class AppmenuComponent implements OnInit {
+export class AppmenuComponent implements OnInit, DoCheck {
 
   constructor(private service: UserService, private router: Router) {
-
+    effect(() => {
+      this.menulist = this.service._menuList();
+    })
   }
 
   menulist!: menu[]
+  loginUser = ''
+  showMenu = false;
 
   ngOnInit(): void {
     let userrole = localStorage.getItem('userrole') as string;
     this.service.Loadmenubyrole(userrole).subscribe(item => {
       this.menulist = item;
     })
+  }
+
+  ngDoCheck(): void {
+    this.loginUser = localStorage.getItem('username') as string;
+    this.setAccess();
+  }
+
+  setAccess() {
+    let userrole = localStorage.getItem('userrole');
+    let currentUrl = this.router.url;
+    if (currentUrl === '/register' || currentUrl === '/login' || currentUrl === '/resetpassword') {
+      this.showMenu = false;
+    } else {
+      this.showMenu = true;
+    }
   }
 
 }
