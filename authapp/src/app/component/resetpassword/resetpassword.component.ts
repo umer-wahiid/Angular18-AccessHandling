@@ -37,7 +37,7 @@ export class ResetpasswordComponent implements OnInit{
       }
       this.service.Resetpassword(_obj).subscribe(item => {
         this._response = item;
-        if (this._response.result = 'pass') {
+        if (this._response.result == 'pass') {
           this.toastr.success('Please login with new password', 'Password Changed')
           this.router.navigateByUrl('/login');
         } else {
