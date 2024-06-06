@@ -7,3 +7,5 @@
 -----For Services----------ng g s _services/serviceName
 
 -----For Environment-----------ng g environments
+
+-----For Guard--------------ng g g _guard/auth

@@ -8,15 +8,16 @@ import { UpdatepasswordComponent } from './component/updatepassword/updatepasswo
 import { ResetpasswordComponent } from './component/resetpassword/resetpassword.component';
 import { CustomerComponent } from './component/customer/customer.component';
 import { UserComponent } from './component/user/user.component';
+import { authGuard } from './_guard/auth.guard';
 
 export const routes: Routes = [
-    {path:'',component:HomeComponent},
-    {path:'register',component:RegisterComponent},
-    {path:'login',component:LoginComponent},
-    {path:'confirmotp',component:ConfirmotpComponent},
-    {path:'forgetpassword',component:ForgetpasswordComponent},
-    {path:'updatepassword',component:UpdatepasswordComponent},
-    {path:'resetpassword',component:ResetpasswordComponent},
-    {path:'customer',component:CustomerComponent},
-    {path:'user',component:UserComponent}
+    { path: '', component: HomeComponent, canActivate: [authGuard] },
+    { path: 'register', component: RegisterComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'confirmotp', component: ConfirmotpComponent },
+    { path: 'forgetpassword', component: ForgetpasswordComponent },
+    { path: 'updatepassword', component: UpdatepasswordComponent },
+    { path: 'resetpassword', component: ResetpasswordComponent },
+    { path: 'customer', component: CustomerComponent, canActivate: [authGuard] },
+    { path: 'user', component: UserComponent, canActivate: [authGuard] }
 ];

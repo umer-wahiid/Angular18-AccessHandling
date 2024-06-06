@@ -39,3 +39,12 @@ export interface updatepassword {
     password: string
     otptext: string
 }
+
+export interface menupermission {
+    code: string;
+    name: string;
+    haveview: boolean;
+    haveadd: boolean;
+    haveedit: boolean;
+    havedelete: boolean;
+}
