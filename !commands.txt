@@ -9,3 +9,5 @@
 -----For Environment-----------ng g environments
 
 -----For Guard--------------ng g g _guard/auth
+
+-----For Interceptor------------ng g interceptor _services/name

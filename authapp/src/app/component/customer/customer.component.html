@@ -1,1 +1,40 @@
-<p>customer works!</p>
+<mat-card>
+    <mat-card-header>
+        <h1>Customer Listing</h1>
+        <button mat-raised-button color="primary">Add Customer</button>
+    </mat-card-header>
+    <mat-card-content>
+        <table mat-table [dataSource]="datasource">
+            <ng-container matColumnDef="code">
+                <th mat-header-cell *matHeaderCellDef>Code</th>
+                <td mat-cell *matCellDef="let element">{{element.code}}</td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let element">{{element.name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef>Email</th>
+                <td mat-cell *matCellDef="let element">{{element.email}}</td>
+            </ng-container>
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef>Phone</th>
+                <td mat-cell *matCellDef="let element">{{element.phone}}</td>
+            </ng-container>
+            <ng-container matColumnDef="creditlimit">
+                <th mat-header-cell *matHeaderCellDef>Credit Limit</th>
+                <td mat-cell *matCellDef="let element">{{element.creditlimit}}</td>
+            </ng-container>
+            <ng-container matColumnDef="statusname">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let element">{{element.statusname}}</td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let element"></td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+            <tr mat-row *matRowDef="let row;columns:displayColumns"></tr>
+        </table>
+    </mat-card-content>
+</mat-card>
