@@ -41,10 +41,10 @@ export interface updatepassword {
 }
 
 export interface menupermission {
-    code: string;
-    name: string;
-    haveview: boolean;
-    haveadd: boolean;
-    haveedit: boolean;
-    havedelete: boolean;
+    code: string
+    name: string
+    haveview: boolean
+    haveadd: boolean
+    haveedit: boolean
+    havedelete: boolean
 }

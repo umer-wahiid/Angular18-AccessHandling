@@ -4,6 +4,9 @@ import { RouterLink } from '@angular/router';
 import { CustomerService } from '../../_services/customer.service';
 import { customer } from '../../_model/customer.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { menupermission } from '../../_model/user.model';
+import { UserService } from '../../_services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-customer',
@@ -15,29 +18,62 @@ import { MatTableDataSource } from '@angular/material/table';
 export class CustomerComponent implements OnInit {
 
   customerlist!: customer[];
+
   displayColumns: string[] = [
     "code",
     "name",
     "email",
     "phone",
     "creditlimit",
-    "isActive",
-    "statusname"
-  ]
-  datasource:any;
+    "statusname",
+    "action"
+  ];
+  datasource: any;
+  _permission: menupermission = {
+    code: '',
+    name: '',
+    haveview: false,
+    haveadd: false,
+    haveedit: false,
+    havedelete: false
+  };
 
-  constructor(private service: CustomerService) { }
+  constructor(private service: CustomerService, private userservice: UserService, private toastr: ToastrService) {
+    this.Setaccess();
+  }
 
   ngOnInit(): void {
     this.LoadCustomer();
   }
 
-  LoadCustomer() {
-    this.service.GetAll().subscribe(item => {
-      this.customerlist = item;
-      console.log(this.customerlist);
-      this.datasource=new MatTableDataSource<customer>(this.customerlist);
+  Setaccess() {
+    let role = localStorage.getItem('userrole') as string;
+    this.userservice.Getmenupermission(role, 'customer').subscribe(item => {
+      this._permission = item;
+      console.log(this._permission);
     })
   }
 
+  LoadCustomer() {
+    this.service.GetAll().subscribe(item => {
+      this.customerlist = item;
+      this.datasource = new MatTableDataSource<customer>(this.customerlist);
+    })
+  }
+
+  functionedit(code: string) {
+    if (this._permission.haveedit) {
+
+    } else {
+      this.toastr.warning('Access denied', 'warning')
+    }
+  }
+
+  functiondelete(code: string) {
+    if (this._permission.havedelete) {
+
+    } else {
+      this.toastr.warning('Access denied', 'warning')
+    }
+  }
 }
