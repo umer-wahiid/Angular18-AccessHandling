@@ -1,34 +1,35 @@
 <mat-card>
     <mat-card-header>
         <h1>Customer Listing</h1>
-        @if(_permission.haveadd){
-            <button style="margin-left: 70%;" mat-raised-button color="primary">Add Customer</button>
+        @if(_permission.haveadd===true){
+        <button style="margin-left: 70%;" mat-raised-button color="primary" routerLink="/customer/add">Add
+            Customer</button>
         }
     </mat-card-header>
     <mat-card-content>
-        <table mat-table [dataSource]="datasource">
+        <table mat-table [dataSource]="datasource" matSort>
             <ng-container matColumnDef="code">
-                <th mat-header-cell *matHeaderCellDef>Code</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Code</th>
                 <td mat-cell *matCellDef="let element">{{element.code}}</td>
             </ng-container>
             <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
                 <td mat-cell *matCellDef="let element">{{element.name}}</td>
             </ng-container>
             <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef>Email</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
                 <td mat-cell *matCellDef="let element">{{element.email}}</td>
             </ng-container>
             <ng-container matColumnDef="phone">
-                <th mat-header-cell *matHeaderCellDef>Phone</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
                 <td mat-cell *matCellDef="let element">{{element.phone}}</td>
             </ng-container>
             <ng-container matColumnDef="creditlimit">
-                <th mat-header-cell *matHeaderCellDef>Credit Limit</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Credit Limit</th>
                 <td mat-cell *matCellDef="let element">{{element.creditlimit}}</td>
             </ng-container>
             <ng-container matColumnDef="statusname">
-                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
                 <td mat-cell *matCellDef="let element">{{element.statusname}}</td>
             </ng-container>
             <ng-container matColumnDef="action">
@@ -42,4 +43,8 @@
             <tr mat-row *matRowDef="let row;columns:displayColumns"></tr>
         </table>
     </mat-card-content>
+    <br>
+    <mat-card-footer>
+        <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+    </mat-card-footer>
 </mat-card>

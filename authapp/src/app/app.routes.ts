@@ -9,6 +9,8 @@ import { ResetpasswordComponent } from './component/resetpassword/resetpassword.
 import { CustomerComponent } from './component/customer/customer.component';
 import { UserComponent } from './component/user/user.component';
 import { authGuard } from './_guard/auth.guard';
+import { UserroleComponent } from './component/userrole/userrole.component';
+import { AddcustomerComponent } from './component/addcustomer/addcustomer.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [authGuard] },
@@ -19,5 +21,8 @@ export const routes: Routes = [
     { path: 'updatepassword', component: UpdatepasswordComponent },
     { path: 'resetpassword', component: ResetpasswordComponent },
     { path: 'customer', component: CustomerComponent, canActivate: [authGuard] },
-    { path: 'user', component: UserComponent, canActivate: [authGuard] }
+    { path: 'customer/add', component: AddcustomerComponent, canActivate: [authGuard] },
+    { path: 'customer/edit/:code', component: AddcustomerComponent, canActivate: [authGuard] },
+    { path: 'user', component: UserComponent, canActivate: [authGuard] },
+    { path: 'userrole', component: UserroleComponent, canActivate: [authGuard] }
 ];

@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MaterialModule } from '../../material.module';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CustomerService } from '../../_services/customer.service';
 import { customer } from '../../_model/customer.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { menupermission } from '../../_model/user.model';
 import { UserService } from '../../_services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-customer',
@@ -18,7 +20,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CustomerComponent implements OnInit {
 
   customerlist!: customer[];
-
+  _response: any;
   displayColumns: string[] = [
     "code",
     "name",
@@ -38,7 +40,10 @@ export class CustomerComponent implements OnInit {
     havedelete: false
   };
 
-  constructor(private service: CustomerService, private userservice: UserService, private toastr: ToastrService) {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private service: CustomerService, private userservice: UserService, private toastr: ToastrService, private router: Router) {
     this.Setaccess();
   }
 
@@ -58,12 +63,14 @@ export class CustomerComponent implements OnInit {
     this.service.GetAll().subscribe(item => {
       this.customerlist = item;
       this.datasource = new MatTableDataSource<customer>(this.customerlist);
+      this.datasource.paginator = this.paginator;
+      this.datasource.sort = this.sort;
     })
   }
 
   functionedit(code: string) {
     if (this._permission.haveedit) {
-
+      this.router.navigateByUrl('/customer/edit/' + code)
     } else {
       this.toastr.warning('Access denied', 'warning')
     }
@@ -71,7 +78,17 @@ export class CustomerComponent implements OnInit {
 
   functiondelete(code: string) {
     if (this._permission.havedelete) {
-
+      if (confirm('Are you sure to delete this record?')) {
+        this.service.DeleteCustomer(code).subscribe(item => {
+          this._response = item;
+          if (this._response.result === 'pass') {
+            this.toastr.success('Deleted successfully', 'Success');
+            this.LoadCustomer();
+          } else {
+            this.toastr.error('Due to: ' + this._response.message, 'Failed');
+          }
+        })
+      }
     } else {
       this.toastr.warning('Access denied', 'warning')
     }

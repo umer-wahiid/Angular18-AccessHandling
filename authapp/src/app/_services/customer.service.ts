@@ -16,4 +16,20 @@ export class CustomerService {
     return this.http.get<customer[]>(this.baseUrl + 'Customer/GetAll');
   }
 
+  GetByCode(code: string) {
+    return this.http.get<customer>(this.baseUrl + 'Customer/Getbycode?code=' + code);
+  }
+
+  CreateCustomer(_data: customer) {
+    return this.http.post(this.baseUrl + 'Customer/create', _data);
+  }
+
+  UpdateCustomer(_data: customer) {
+    return this.http.put(this.baseUrl + 'Customer/Update?code=' + _data.code, _data);
+  }
+
+  DeleteCustomer(code: string) {
+    return this.http.delete(this.baseUrl + 'Customer/Remove?code=' + code);
+  }
+
 }
