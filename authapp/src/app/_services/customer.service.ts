@@ -31,5 +31,5 @@ export class CustomerService {
   DeleteCustomer(code: string) {
     return this.http.delete(this.baseUrl + 'Customer/Remove?code=' + code);
   }
-
+  
 }

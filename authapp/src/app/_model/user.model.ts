@@ -1,37 +1,37 @@
 export interface userregister {
-    userName: string;
-    name: string;
-    email: string;
-    phone: string;
+    userName: string
+    name: string
+    email: string
+    phone: string
     password: string
 }
 
 export interface registerconfirm {
-    userid: number;
-    username: string;
-    otptext: string;
+    userid: number
+    username: string
+    otptext: string
 }
 
 export interface usercred {
-    username: string;
-    password: string;
+    username: string
+    password: string
 }
 
 export interface loginresp {
-    token: string;
-    refreshToken: string;
-    userRole: string;
+    token: string
+    refreshToken: string
+    userRole: string
 }
 
 export interface menu {
-    code: string;
-    name: string;
+    code: string
+    name: string
 }
 
 export interface resetpassword {
-    username: string;
-    oldpassword: string;
-    newpassword: string;
+    username: string
+    oldpassword: string
+    newpassword: string
 }
 
 export interface updatepassword {
@@ -47,4 +47,26 @@ export interface menupermission {
     haveadd: boolean
     haveedit: boolean
     havedelete: boolean
+}
+
+export interface users {
+    username: string
+    name: string
+    email: string
+    phone: string
+    isactive: boolean
+    statusname: string
+    role: string
+}
+
+export interface updateuser {
+    username: string
+    role: string
+    status: boolean
+}
+
+export interface roles {
+    code: string
+    name: string
+    status: string
 }
