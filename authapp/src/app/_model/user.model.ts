@@ -41,7 +41,9 @@ export interface updatepassword {
 }
 
 export interface menupermission {
+    userrole: string
     code: string
+    menucode: string
     name: string
     haveview: boolean
     haveadd: boolean
@@ -68,5 +70,11 @@ export interface updateuser {
 export interface roles {
     code: string
     name: string
-    status: string
+    status: boolean
+}
+
+export interface menus {
+    code: string
+    name: string
+    status: boolean
 }

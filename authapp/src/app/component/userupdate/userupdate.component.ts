@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { roles, updateuser, users } from '../../_model/user.model';
 import { UserService } from '../../_services/user.service';
 
@@ -22,7 +22,7 @@ export class UserupdateComponent implements OnInit {
   rolelist!: roles[];
   type = '';
 
-  constructor(private builder: FormBuilder, private toastr: ToastrService, @Inject(MAT_DIALOG_DATA) public data: any, private service: UserService, private ref: MatDialogRef<UserupdateComponent>, private dialog: MatDialog) {
+  constructor(private builder: FormBuilder, private toastr: ToastrService, @Inject(MAT_DIALOG_DATA) public data: any, private service: UserService, private ref: MatDialogRef<UserupdateComponent>) {
   }
 
   ngOnInit(): void {
@@ -82,7 +82,7 @@ export class UserupdateComponent implements OnInit {
   }
 
   closepopup() {
-    this.dialog.closeAll();
+    this.ref.close();
   }
 
 }

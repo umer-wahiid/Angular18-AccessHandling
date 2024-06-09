@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { loginresp, menu, menupermission, registerconfirm, resetpassword, roles, updatepassword, updateuser, usercred, userregister, users } from '../_model/user.model';
+import { loginresp, menu, menupermission, menus, registerconfirm, resetpassword, roles, updatepassword, updateuser, usercred, userregister, users } from '../_model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -72,4 +72,13 @@ export class UserService {
   GetAllRoles() {
     return this.http.get<roles[]>(this.baseUrl + 'UserRole/GetAllRoles');
   }
+
+  GetAllMenus() {
+    return this.http.get<menus[]>(this.baseUrl + 'UserRole/GetAllMenus');
+  }
+
+  AssignRolePermission(_data:menupermission[]){
+    return this.http.post(this.baseUrl + 'UserRole/assignrolepermission', _data);
+  }
+  
 }

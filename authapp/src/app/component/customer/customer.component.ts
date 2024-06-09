@@ -37,7 +37,9 @@ export class CustomerComponent implements OnInit {
     haveview: false,
     haveadd: false,
     haveedit: false,
-    havedelete: false
+    havedelete: false,
+    userrole: '',
+    menucode: ''
   };
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
